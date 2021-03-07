@@ -60,7 +60,7 @@ export default function index() {
     },
   };
   // 下载全部按钮
-  const handelDownload: Function = (): void => {
+  const handelDownload = (): void => {
     if (fileListState.length === 0) {
       message.error("你还没添加文件呢");
       return;
@@ -126,6 +126,14 @@ export default function index() {
     });
   };
 
+  const clear = (): void => {
+    if (fileListState.length === 0) {
+      message.error("你还未没添加文件");
+      return;
+    }
+    setFileListState([]);
+  };
+
   return (
     <Spin spinning={loading}>
       {/* 功能选择区 */}
@@ -149,11 +157,15 @@ export default function index() {
               onChange={handelSliderChange}
             />
           </Col>
-          <Col span={2}>
-            <Button onClick={() => handelDownload()}>下载全部</Button>
+          <Col span={5}>
+            <Button onClick={handelDownload}>下载全部</Button>
+            <Button onClick={clear} className="m-l-10">
+              清空
+            </Button>
           </Col>
         </Row>
       </div>
+      {/* 文件上传 */}
       <Dragger {...UploadProps}>
         <p className="ant-upload-drag-icon">
           <InboxOutlined />
@@ -161,11 +173,13 @@ export default function index() {
         <p className="ant-upload-text">点击或拖拽图片到此区域</p>
       </Dragger>
       {/* 显示处理完的图片列表 */}
-      <div className={styles["index-list"]}>
+      <div className={[styles["index-list"], "m-l-10"].join()}>
         {fileListState.map((e: any) => (
           <div key={e.uid}>
             <Img width={200} src={e.src} />
-            <div>{e.name}</div>
+            <div title={e.name} className={styles["index-list_name"]}>
+              {e.name}
+            </div>
             <div>原始大小：{calc.fileSize(e.originalSize)}MB</div>
             <div>压缩后大小：{calc.fileSize(e.size)}MB</div>
             <a href={e.src} download={e.name}>

@@ -1,0 +1,27 @@
+body {
+  background-color: #eee;
+}
+
+// 定义内外边距
+// 例：m-10 => margin: 10px;
+@for $i from 1 through 100 {
+  .m-#{$i} {
+    margin: $i + px !important;
+  }
+
+  .p-#{$i} {
+    padding: $i + px !important;
+  }
+  // 例: m-l-10 => margin-left: 10px;
+  @each $key, $value in l left, t top, r right, b bottom {
+    // 外边距
+    .m-#{$key}-#{$i} {
+      margin-#{$value}: $i + px !important;
+    }
+
+    // 内边距
+    .p-#{$key}-#{$i} {
+      padding-#{$value}: $i + px !important;
+    }
+  }
+}

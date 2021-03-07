@@ -1,4 +1,14 @@
-.index-list{
+.index-tool{
+  margin-bottom: 20px;
+}
+
+.index-list {
   display: flex;
   align-items: center;
+  &_name {
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
