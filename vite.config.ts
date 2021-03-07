@@ -1,8 +1,7 @@
-import reactRefresh from '@vitejs/plugin-react-refresh'
-import { defineConfig } from 'vite'
-import path from "path"
-import styleImport from 'vite-plugin-style-import';
-
+import reactRefresh from "@vitejs/plugin-react-refresh";
+import { defineConfig } from "vite";
+import path from "path";
+import styleImport from "vite-plugin-style-import";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -13,19 +12,21 @@ export default defineConfig({
       },
     },
   },
-  alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
+  resolve: {
+    alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
+  },
   plugins: [
     reactRefresh(),
     styleImport({
       libs: [
         {
-          libraryName: 'antd',
+          libraryName: "antd",
           esModule: true,
           resolveStyle: (name) => {
             return `antd/es/${name}/style/index`;
           },
-        }
+        },
       ],
     }),
-  ]
-})
+  ],
+});

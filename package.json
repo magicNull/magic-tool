@@ -2,13 +2,16 @@
   "name": "magic-tool",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --open",
+    "dev": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview"
   },
   "dependencies": {
+    "@types/file-saver": "^2.0.1",
     "@types/react-router-dom": "^5.1.7",
     "antd": "^4.12.2",
+    "file-saver": "^2.0.5",
+    "jszip": "^3.6.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-router-dom": "^5.2.0"
