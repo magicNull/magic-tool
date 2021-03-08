@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { Menu } from "antd";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -9,10 +9,10 @@ import {
   TableOutlined,
 } from "@ant-design/icons";
 
-import Index from "@/pages/index";
-import Shorthand from "@/pages/Shorthand";
-import Color from "@/pages/Color";
-import styles from './index.module.scss'
+const Index = lazy(() => import("@/pages/index"));
+const Shorthand = lazy(() => import("@/pages/Shorthand"));
+const Color = lazy(() => import("@/pages/Color"));
+import styles from "./index.module.scss";
 const { SubMenu } = Menu;
 
 export default class Layout extends React.Component {
@@ -73,15 +73,17 @@ export default class Layout extends React.Component {
             </Menu.ItemGroup>
           </SubMenu>
         </Menu>
-        <main className={styles.content}>
-          <Switch>
-            <Route path="/" exact component={Index} />
-            <Route path="/shorthand" exact component={Shorthand} />
-            {/* 基本工具 begin */}
-            <Route path="/color" exact component={Color} />
-            <Route path="*" component={Index} />
-          </Switch>
-        </main>
+        <Suspense fallback={<div>Loading...</div>}>
+          <main className={styles.content}>
+            <Switch>
+              <Route path="/" exact component={Index} />
+              <Route path="/shorthand" exact component={Shorthand} />
+              {/* 基本工具 begin */}
+              <Route path="/color" exact component={Color} />
+              <Route path="*" component={Index} />
+            </Switch>
+          </main>
+        </Suspense>
       </Router>
     );
   }

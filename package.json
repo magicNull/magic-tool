@@ -7,7 +7,6 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@types/file-saver": "^2.0.1",
     "@types/react-router-dom": "^5.1.7",
     "antd": "^4.12.2",
     "file-saver": "^2.0.5",
@@ -17,6 +16,7 @@
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.1",
     "@types/node": "^14.14.25",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
