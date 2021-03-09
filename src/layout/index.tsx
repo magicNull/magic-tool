@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from "react";
-import { Menu } from "antd";
+import { Menu, Skeleton } from "antd";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import {
@@ -9,9 +9,17 @@ import {
   TableOutlined,
 } from "@ant-design/icons";
 
+// 首页-图片处理
 const Index = lazy(() => import("@/pages/index"));
+// 速记
 const Shorthand = lazy(() => import("@/pages/Shorthand"));
+// 颜色处理
 const Color = lazy(() => import("@/pages/Color"));
+
+//#region  css测试工具
+// flex
+const Flex = lazy(() => import("@/pages/CssTool/Flex"));
+//#endregion
 import styles from "./index.module.scss";
 const { SubMenu } = Menu;
 
@@ -62,9 +70,11 @@ export default class Layout extends React.Component {
             </Menu.ItemGroup>
           </SubMenu>
           {/* css 布局和样式快速查看 */}
-          <SubMenu key="cssTool" icon={<TableOutlined />} title="CSS 测试工具">
+          <SubMenu key="css-tool" icon={<TableOutlined />} title="CSS 测试工具">
             <Menu.ItemGroup title="布局">
-              <Menu.Item key="flex">flex</Menu.Item>
+              <Menu.Item key="flex">
+                <Link to="/css-tool/flex">flex</Link>
+              </Menu.Item>
               <Menu.Item key="grid">grid</Menu.Item>
             </Menu.ItemGroup>
             <Menu.ItemGroup title="样式">
@@ -73,17 +83,22 @@ export default class Layout extends React.Component {
             </Menu.ItemGroup>
           </SubMenu>
         </Menu>
-        <Suspense fallback={<div>Loading...</div>}>
-          <main className={styles.content}>
+        <main className={styles.content}>
+          <Suspense fallback={<Skeleton active />}>
             <Switch>
               <Route path="/" exact component={Index} />
               <Route path="/shorthand" exact component={Shorthand} />
               {/* 基本工具 begin */}
               <Route path="/color" exact component={Color} />
+
+              {/* css测试工具 begin */}
+              <Route path={`/css-tool`} exact component={Flex} />
+              <Route path={`/css-tool/flex`} exact component={Flex} />
+              {/* css测试工具 end */}
               <Route path="*" component={Index} />
             </Switch>
-          </main>
-        </Suspense>
+          </Suspense>
+        </main>
       </Router>
     );
   }

@@ -25,3 +25,36 @@ body {
     }
   }
 }
+
+//字体相关的 
+// 字体大小 只有偶数
+// 示例：font-10 => font-size: 10px;
+@for $font from 10 through 100 {
+  @if $font % 2 == 0 {
+    .font-#{$font} {
+      font-size: $font + px !important;
+    }
+  }
+}
+
+//字体粗细 normal bold bolder lighter inherit
+//舍弃 100-900的数字
+$fontWeight: n normal, b bold, bd bolder, l lighter, i inherit;
+@each $key, $value in $fontWeight {
+  // 示例： font-w-b => font-weight: bold;
+  .font-w-#{$key} {
+    font-weight: $value !important;
+  }
+  // 示例： font-weight-bold => font-weight: bold;
+  .font-weight-#{$value} {
+    font-weight: $value !important;
+  }
+}
+
+//flex 相关
+.flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
