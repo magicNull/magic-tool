@@ -1,7 +1,7 @@
-.flex-control{
+.flex-control {
   display: flex;
   margin-bottom: 10px;
-  &>span{
+  & > span {
     margin-right: 10px;
   }
 }
@@ -9,23 +9,30 @@
 .flex-box {
   width: 80%;
   margin: auto;
-  min-height: 20vh;
+  position: relative;
+  // min-height: 30vh;
+  padding: 100px;
   background-image: linear-gradient(
     90deg,
     rgb(247, 210, 90) 0%,
     rgb(250, 121, 85) 100%
   );
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // flex-wrap: wrap;
+  &_switch {
+    position: absolute;
+    color: red;
+    right: 10px;
+    top: 10px;
+  }
   &_row {
-    padding: 10px;
-    height: 100%;
+    padding-bottom: 100px;
+    height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    // align-items: center;
+    // justify-content: center;
   }
   &_col {
     $color: #c535bf;
@@ -38,13 +45,12 @@
     font-size: 24px;
     border-radius: 10px;
     text-align: center;
-    margin: 20px;
+    margin: 5px;
     overflow: hidden;
     cursor: pointer;
     background-color: #fff;
     transition: 0.3s;
-    // -webkit-box-reflect: below 8px
-    //   linear-gradient(transparent, rgb(255, 123, 0));
+
     &:hover {
       color: #fff;
       box-shadow: 0 0 5px $color, 0 0 25px $color;
@@ -63,14 +69,14 @@
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      width: 150%;
+      width: 300%;
       height: 300%;
       background-color: $color;
       background-repeat: no-repeat;
       background-size: 50% 50%;
       background-position: 0 0;
       background-image: conic-gradient(#00e266, #00e266);
-      animation: rotate 2s linear infinite;
+      animation: rotate_contrary 1.5s linear infinite;
     }
 
     &::after {
@@ -85,6 +91,29 @@
       border-radius: 10px;
     }
   }
+  &_col:nth-of-type(odd) {
+    height: 120px;
+    &::before {
+      animation: rotate 1.5s linear infinite;
+    }
+  }
+  &_col:nth-of-type(3n) {
+    height: 70px;
+  }
+}
+
+.ON {
+  -webkit-box-reflect: below 8px linear-gradient(transparent, rgb(255, 123, 0)) !important;
+}
+
+.OFF {
+  -webkit-box-reflect: none;
+  background-color: #C535BF;
+  &::before,&::after {
+    width: 0;
+    height: 0;
+    // animation: none !important;
+  }
 }
 
 @keyframes rotate {
@@ -93,3 +122,8 @@
   }
 }
 
+@keyframes rotate_contrary {
+  100% {
+    transform: translate(-50%, -50%) rotate(-1turn);
+  }
+}
