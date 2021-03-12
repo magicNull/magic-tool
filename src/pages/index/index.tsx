@@ -31,6 +31,7 @@ export default function index() {
     listType: "picture",
     action: "/",
     showUploadList: false,
+    accept: "image/*",
     onChange(info: { file: { name?: any; status?: any }; fileList: any }) {
       const { status } = info.file;
       if (status !== "uploading") {
@@ -43,6 +44,10 @@ export default function index() {
       }
     },
     beforeUpload: (file: RcFile) => {
+      if (file.type.indexOf("image") === -1) {
+        message.error("请上传文件");
+        return false;
+      }
       canvasDataURL(
         file,
         (blob: Blob, base64: any) => {
