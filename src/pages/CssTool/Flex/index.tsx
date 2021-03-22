@@ -155,7 +155,7 @@ export default function index() {
                 <InputNumber
                   min={0}
                   max={100}
-                  defaultValue={0}
+                  defaultValue={typeof RowNum === 'number' ? RowNum : 0}
                   onChange={(e) => handleRowOrCol(e, "row")}
                 />
               </Col>
@@ -164,7 +164,7 @@ export default function index() {
                 <InputNumber
                   min={0}
                   max={100}
-                  defaultValue={0}
+                  defaultValue={typeof ColNum === 'number' ? ColNum : 0}
                   onChange={(e) => handleRowOrCol(e, "col")}
                 />
               </Col>

@@ -1,9 +1,23 @@
-
-.content{
-  width: 1400px;
+$width: 1400px;
+.content {
+  width: $width;
   margin: auto;
   background-color: #fff;
   padding: 1rem;
-  min-height: calc(100vh - 50px);
+  min-height: calc(100vh - 88px);
   box-sizing: border-box;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  width: $width;
+  margin: auto;
+  background-color: #fff;
+  padding-left: 20px;
+  border-top: 1px solid #eee;
+}
+
+.none{
+  color: #000!important;
 }
